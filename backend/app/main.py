@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import create_tables
-from app.routers import genres, ratings, releases, search, trends
+from app.routers import auth, genres, ratings, releases, search, trends
 
 
 @asynccontextmanager
@@ -21,13 +21,14 @@ app = FastAPI(title="OTT Analytics API", lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://localhost:4173", "*"],
-    allow_methods=["GET"],
+    allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
 
 # ---------------------------------------------------------------------------
 # Routers
 # ---------------------------------------------------------------------------
+app.include_router(auth.router, prefix="/api")
 app.include_router(ratings.router, prefix="/api")
 app.include_router(genres.router, prefix="/api")
 app.include_router(releases.router, prefix="/api")

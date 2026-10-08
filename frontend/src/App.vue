@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <!-- Sidebar navigation -->
-    <v-navigation-drawer v-model="drawer" :rail="rail" permanent>
+    <!-- Sidebar navigation — only shown when logged in -->
+    <v-navigation-drawer v-if="isAuthenticated" v-model="drawer" :rail="rail" permanent>
       <v-list-item
         prepend-icon="mdi-play-circle-outline"
         title="OTT Analytics"
@@ -37,6 +37,15 @@
         <span class="font-weight-bold">OTT Analytics</span>
         <span class="text-medium-emphasis text-body-2 ml-2">MVP</span>
       </v-app-bar-title>
+
+      <template v-if="isAuthenticated" #append>
+        <v-btn
+          icon="mdi-logout"
+          variant="text"
+          title="Sign out"
+          @click="handleLogout"
+        />
+      </template>
     </v-app-bar>
 
     <!-- Main content -->
@@ -48,6 +57,10 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { isAuthenticated, logout } from './composables/useAuth.js'
+
+const router = useRouter()
 
 const drawer = ref(true)
 const rail   = ref(false)
@@ -60,4 +73,9 @@ const navItems = [
   { to: '/trends',   title: 'Trends',    icon: 'mdi-trending-up'            },
   { to: '/search',   title: 'Search',    icon: 'mdi-magnify'                },
 ]
+
+function handleLogout() {
+  logout()
+  router.push('/login')
+}
 </script>

@@ -1,6 +1,7 @@
 """SQLAlchemy Core table definitions."""
 
 from sqlalchemy import (
+    Boolean,
     Column,
     ForeignKey,
     Integer,
@@ -11,6 +12,15 @@ from sqlalchemy import (
 )
 
 metadata = MetaData()
+
+users = Table(
+    "users",
+    metadata,
+    Column("id", Integer, primary_key=True, autoincrement=True),
+    Column("username", Text, nullable=False, unique=True),
+    Column("hashed_password", Text, nullable=False),
+    Column("is_active", Boolean, default=True),
+)
 
 titles = Table(
     "titles",
