@@ -52,6 +52,11 @@ def search_titles(
             rating=r.rating,
             platform=r.platform,
             genres=genres_map.get(r.id, []),
+            runtime_min=r.runtime_min,
+            language=r.language,
+            country=r.country,
+            description=r.description,
+            vote_count=r.vote_count,
         )
         for r in rows
     ]

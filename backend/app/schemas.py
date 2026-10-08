@@ -58,3 +58,8 @@ class SearchResult(BaseModel):
     rating: Optional[str]
     platform: Optional[str]
     genres: list[str]
+    runtime_min: Optional[int] = None
+    language: Optional[str] = None
+    country: Optional[str] = None
+    description: Optional[str] = None
+    vote_count: Optional[int] = None
