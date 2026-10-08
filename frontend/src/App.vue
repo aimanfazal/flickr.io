@@ -82,6 +82,10 @@ function handleLogout() {
 
 html, body, #app { background: var(--na-bg) !important; }
 
+/* Let v-main pass its full available height to child views */
+.v-main__scroller { height: 100% !important; }
+.v-main__scroller > * { height: 100%; }
+
 * { scrollbar-width: thin; scrollbar-color: var(--na-purple) var(--na-surface); }
 ::-webkit-scrollbar       { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--na-surface); }

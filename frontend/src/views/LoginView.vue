@@ -22,7 +22,7 @@
 
         <div class="na-card__divider" />
 
-        <p class="na-card__headline">Welcome back 👾</p>
+        <p class="na-card__headline">Welcome Back 👾</p>
         <p class="na-card__sub">Sign in to access your dashboard</p>
 
         <v-form ref="formRef" @submit.prevent="handleLogin" class="mt-5">
@@ -113,7 +113,8 @@ async function handleLogin() {
 <style scoped>
 /* ── page ── */
 .na-login {
-  min-height: 100vh;
+  height: 100%;
+  min-height: 0;
   background: #12111A;
   display: flex;
   align-items: center;
@@ -249,7 +250,6 @@ async function handleLogin() {
   text-align: center;
   font-size: 0.75rem;
   color: #6B6A8A;
-  margin: 0;
 }
 .na-hint strong { color: #A855F7; }
 </style>

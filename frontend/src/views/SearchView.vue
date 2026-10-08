@@ -7,31 +7,33 @@
       </div>
     </div>
 
-    <div class="na-search-row mb-6">
-      <div class="na-search-main">
-        <v-text-field
-          v-model="query"
-          label="Search by title…"
-          prepend-inner-icon="mdi-magnify"
-          clearable
-          density="comfortable"
-          variant="outlined"
-          hide-details
-          class="na-select"
-          @click:clear="results = []"
-        />
-      </div>
-      <div class="na-filter-item">
-        <v-select
-          v-model="platform"
-          :items="platformOptions"
-          label="Platform"
-          clearable
-          density="comfortable"
-          variant="outlined"
-          hide-details
-          class="na-select"
-        />
+    <div class="na-search-wrap mb-6">
+      <div class="na-search-row">
+        <div class="na-search-main">
+          <v-text-field
+            v-model="query"
+            label="Search by title…"
+            prepend-inner-icon="mdi-magnify"
+            clearable
+            density="comfortable"
+            variant="outlined"
+            hide-details
+            class="na-select"
+            @click:clear="results = []"
+          />
+        </div>
+        <div class="na-filter-item">
+          <v-select
+            v-model="platform"
+            :items="platformOptions"
+            label="Platform"
+            clearable
+            density="comfortable"
+            variant="outlined"
+            hide-details
+            class="na-select"
+          />
+        </div>
       </div>
     </div>
 
@@ -89,9 +91,21 @@ watch([query, platform], () => { clearTimeout(debounceTimer); debounceTimer = se
 .na-page-title { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; color: #EDE9FE; margin: 0 0 4px; }
 .na-page-sub   { font-size: 0.82rem; color: #6B6A8A; margin: 0; }
 
-.na-search-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-.na-search-main { flex: 1; min-width: 240px; }
-.na-filter-item { min-width: 180px; }
+/* Centred search container */
+.na-search-wrap {
+  display: flex;
+  justify-content: center;
+}
+.na-search-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  width: 100%;
+  max-width: 720px;
+}
+/* Search field = 2 × platform dropdown via flex ratio */
+.na-search-main { flex: 2; }
+.na-filter-item  { flex: 1; }
 .na-select :deep(.v-field) { background: rgba(37,35,64,0.7) !important; border-radius: 12px !important; }
 
 .na-state {
