@@ -1,6 +1,6 @@
-# OTT Analytics MVP
+# Flickr.io
 
-A monorepo analytics dashboard for exploring movie and OTT content data — ratings,
+A monorepo content intelligence dashboard for exploring movie and streaming data — ratings,
 genres, release trends, and audience preferences across Netflix, Prime Video, and Disney+.
 
 **No AI/ML. No external API dependency. Powered entirely by Kaggle CSV datasets.**
@@ -10,7 +10,7 @@ genres, release trends, and audience preferences across Netflix, Prime Video, an
 ## Project Structure
 
 ```
-ott-analytics/
+flickr.io/
 ├── backend/          # Python FastAPI + SQLite
 │   ├── app/          # FastAPI application
 │   ├── scripts/      # Data ingestion script
@@ -76,7 +76,7 @@ pip install -r requirements.txt
 
 ## 3 — Ingest Data
 
-Run the ingestion script once per platform. It creates `backend/app/ott.db` automatically.
+Run the ingestion script once per platform. It creates `backend/app/flickrio.db` automatically.
 
 ```bash
 # From the backend/ directory (with venv active)
@@ -89,7 +89,7 @@ The script is idempotent — re-running it will not create duplicate rows.
 
 > **Note:** The SQLite DB file lives inside the container when deployed to Railway/Render.
 > Data resets on every redeploy unless a persistent volume is attached. For the MVP,
-> commit a pre-seeded `ott.db` to the repo or re-run the ingest script after each deploy.
+> commit a pre-seeded `flickrio.db` to the repo or re-run the ingest script after each deploy.
 
 ---
 

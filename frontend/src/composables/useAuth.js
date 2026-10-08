@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { login as apiLogin } from '../api/index.js'
 
-const TOKEN_KEY = 'ott_auth_token'
+const TOKEN_KEY = 'flickrio_auth_token'
 
 const token = ref(localStorage.getItem(TOKEN_KEY) ?? null)
 

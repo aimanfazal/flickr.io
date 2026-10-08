@@ -13,7 +13,7 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title="OTT Analytics API", lifespan=lifespan)
+app = FastAPI(title="Flickr.io API", lifespan=lifespan)
 
 # ---------------------------------------------------------------------------
 # CORS — allow the Vite dev server and any deployed frontend origin
