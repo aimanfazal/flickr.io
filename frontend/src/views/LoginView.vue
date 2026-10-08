@@ -12,10 +12,10 @@
         <!-- Logo -->
         <div class="na-logo">
           <div class="na-logo__icon">
-            <v-icon icon="mdi-television-play" size="28" color="white" />
+            <v-icon icon="mdi-filmstrip" size="28" color="white" />
           </div>
           <div>
-            <div class="na-logo__name">OTT<span class="na-logo__accent">analytics</span></div>
+            <div class="na-logo__name"><em>Flickr</em><span class="na-logo__accent">.io</span></div>
             <div class="na-logo__sub">Content Intelligence Dashboard</div>
           </div>
         </div>

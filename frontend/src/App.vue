@@ -7,9 +7,9 @@
       <!-- Logo -->
       <div class="na-bar__logo ml-4">
         <div class="na-bar__logo-icon">
-          <v-icon icon="mdi-television-play" size="18" />
+          <v-icon icon="mdi-filmstrip" size="17" />
         </div>
-        <span class="na-bar__logo-name">OTT<span class="na-bar__logo-accent">analytics</span></span>
+        <span class="na-bar__logo-name">Flickr<span class="na-bar__logo-accent">.io</span></span>
       </div>
 
       <!-- Nav links -->
@@ -121,9 +121,10 @@ html, body, #app { background: var(--na-bg) !important; }
   box-shadow: 0 3px 10px rgba(168, 85, 247, 0.4);
 }
 .na-bar__logo-name {
-  font-size: 0.95rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: 1.05rem;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.03em;
   color: var(--na-text);
 }
 .na-bar__logo-accent {
@@ -131,6 +132,9 @@ html, body, #app { background: var(--na-bg) !important; }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 /* Nav links */
