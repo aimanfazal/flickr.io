@@ -1,32 +1,68 @@
 <template>
-  <v-card variant="outlined" rounded="lg" class="title-card">
-    <v-card-title class="text-body-1 font-weight-bold pb-1">{{ title.name }}</v-card-title>
-    <v-card-subtitle class="pt-0">
-      <v-chip size="x-small" class="mr-1" color="primary" variant="tonal">{{ title.platform }}</v-chip>
-      <v-chip size="x-small" class="mr-1" variant="tonal">{{ title.type }}</v-chip>
-      <v-chip size="x-small" class="mr-1" variant="tonal">{{ title.release_year }}</v-chip>
-      <v-chip v-if="title.rating" size="x-small" variant="tonal">{{ title.rating }}</v-chip>
-    </v-card-subtitle>
-    <v-card-text class="pt-2">
-      <v-chip
+  <div class="na-title-card">
+    <div class="na-title-card__name">{{ title.name }}</div>
+    <div class="na-title-card__meta">
+      <span class="na-badge na-badge--purple">{{ title.platform }}</span>
+      <span class="na-badge">{{ title.type }}</span>
+      <span class="na-badge">{{ title.release_year }}</span>
+      <span v-if="title.rating" class="na-badge na-badge--lime">{{ title.rating }}</span>
+    </div>
+    <div class="na-title-card__genres">
+      <span
         v-for="genre in title.genres"
         :key="genre"
-        size="x-small"
-        class="mr-1 mb-1"
-        color="secondary"
-        variant="tonal"
-      >{{ genre }}</v-chip>
-    </v-card-text>
-  </v-card>
+        class="na-badge na-badge--pink"
+      >{{ genre }}</span>
+    </div>
+  </div>
 </template>
 
 <script setup>
-defineProps({
-  title: { type: Object, required: true },
-})
+defineProps({ title: { type: Object, required: true } })
 </script>
 
 <style scoped>
-.title-card { transition: box-shadow 0.2s; }
-.title-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.12); }
+.na-title-card {
+  background: #1C1A2E;
+  border-radius: 16px;
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  padding: 16px;
+  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+}
+.na-title-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(168, 85, 247, 0.18);
+  border-color: rgba(168, 85, 247, 0.35);
+}
+
+.na-title-card__name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #EDE9FE;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.na-title-card__meta,
+.na-title-card__genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 7px;
+}
+
+.na-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: rgba(107, 106, 138, 0.2);
+  color: #6B6A8A;
+}
+.na-badge--purple { background: rgba(168,85,247,0.18); color: #C084FC; }
+.na-badge--pink   { background: rgba(236,72,153,0.15); color: #F472B6; }
+.na-badge--lime   { background: rgba(132,204,22,0.15); color: #A3E635; }
 </style>

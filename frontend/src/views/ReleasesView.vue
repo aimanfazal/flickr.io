@@ -1,43 +1,32 @@
 <template>
-  <v-container fluid class="pa-6">
-    <div class="text-h5 font-weight-bold mb-2">📅 Release Timeline</div>
-    <div class="text-body-2 text-medium-emphasis mb-6">
-      Number of titles released per year
+  <div class="na-view">
+    <div class="na-page-header">
+      <div>
+        <h1 class="na-page-title">Release Timeline</h1>
+        <p class="na-page-sub">Number of titles released per year</p>
+      </div>
     </div>
 
-    <!-- Filters -->
-    <v-row class="mb-6" dense>
-      <v-col cols="12" sm="4">
-        <v-select
-          v-model="platform"
-          :items="platformOptions"
-          label="Platform"
-          clearable
-          density="compact"
-          variant="outlined"
-        />
-      </v-col>
-      <v-col cols="12" sm="4">
-        <v-select
-          v-model="type"
-          :items="typeOptions"
-          label="Type"
-          clearable
-          density="compact"
-          variant="outlined"
-        />
-      </v-col>
-    </v-row>
+    <div class="na-filters mb-6">
+      <div class="na-filter-item">
+        <v-select v-model="platform" :items="platformOptions" label="Platform" clearable density="compact" variant="outlined" hide-details class="na-select" />
+      </div>
+      <div class="na-filter-item">
+        <v-select v-model="type" :items="typeOptions" label="Type" clearable density="compact" variant="outlined" hide-details class="na-select" />
+      </div>
+    </div>
 
-    <v-card rounded="lg" class="pa-4">
+    <div class="na-panel">
+      <div class="na-panel__header">
+        <span class="na-panel__title">Titles Released Per Year</span>
+        <div class="na-panel__dot na-panel__dot--pink" />
+      </div>
       <div style="height:380px">
         <LineChart v-if="chartData" :chartData="chartData" :options="chartOptions" />
-        <div v-else class="d-flex align-center justify-center" style="height:100%">
-          <v-progress-circular indeterminate color="primary" />
-        </div>
+        <div v-else class="na-loader"><v-progress-circular indeterminate color="primary" size="28" /></div>
       </div>
-    </v-card>
-  </v-container>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -48,7 +37,6 @@ import { getReleases } from '../api/index.js'
 const platform = ref(null)
 const type     = ref(null)
 const releases = ref([])
-
 const platformOptions = ['Netflix', 'Prime', 'Disney+']
 const typeOptions     = ['Movie', 'TV Show']
 
@@ -59,7 +47,6 @@ async function load() {
   const res = await getReleases(params)
   releases.value = res.data
 }
-
 onMounted(load)
 watch([platform, type], load)
 
@@ -70,17 +57,34 @@ const chartData = computed(() => {
     datasets: [{
       label: 'Titles Released',
       data: releases.value.map(r => r.count),
-      borderColor: '#8b5cf6',
-      backgroundColor: 'rgba(139,92,246,0.15)',
+      borderColor: '#EC4899',
+      backgroundColor: 'rgba(236,72,153,0.1)',
       fill: true,
       tension: 0.4,
-      pointRadius: 5,
+      pointBackgroundColor: '#EC4899',
+      pointRadius: 4,
+      pointHoverRadius: 6,
     }],
   }
 })
-
 const chartOptions = {
-  plugins: { legend: { display: true } },
-  scales:  { y: { beginAtZero: true, ticks: { stepSize: 1 } } },
+  plugins: { legend: { display: true, labels: { color: '#6B6A8A', font: { size: 11 }, boxWidth: 12 } } },
+  scales: { y: { beginAtZero: true } },
 }
 </script>
+
+<style scoped>
+.na-view { padding: 28px 24px; }
+.na-page-header { margin-bottom: 24px; }
+.na-page-title { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; color: #EDE9FE; margin: 0 0 4px; }
+.na-page-sub   { font-size: 0.82rem; color: #6B6A8A; margin: 0; }
+.na-filters    { display: flex; gap: 14px; flex-wrap: wrap; }
+.na-filter-item { min-width: 180px; }
+.na-select :deep(.v-field) { background: rgba(37,35,64,0.7) !important; border-radius: 12px !important; }
+.na-panel { background: #1C1A2E; border-radius: 20px; border: 1px solid rgba(168,85,247,0.14); padding: 20px; }
+.na-panel__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.na-panel__title  { font-size: 0.88rem; font-weight: 600; color: #EDE9FE; }
+.na-panel__dot    { width: 8px; height: 8px; border-radius: 50%; }
+.na-panel__dot--pink { background: #EC4899; box-shadow: 0 0 6px #EC4899; }
+.na-loader { height: 100%; display: flex; align-items: center; justify-content: center; }
+</style>
